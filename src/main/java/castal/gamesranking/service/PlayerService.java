@@ -20,6 +20,10 @@ public class PlayerService {
         this.repository.delete(player);
     }
 
+    public Player findById(Long id) {
+        return (Player) this.repository.findById(id).get();
+    }
+
     public List<Player> findAll() {
         return (List<Player>) this.repository.findAll();
     }

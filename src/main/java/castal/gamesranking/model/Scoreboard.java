@@ -29,6 +29,10 @@ public class Scoreboard {
         return scoreEntries;
     }
 
+    public void setScoreEntries(Set<ScoreEntry> scoreEntries) {
+        this.scoreEntries = scoreEntries;
+    }
+
     public void addScoreEntry(ScoreEntry scoreEntry) {
         if (this.scoreEntries == null) {
             this.scoreEntries = new HashSet<>();
