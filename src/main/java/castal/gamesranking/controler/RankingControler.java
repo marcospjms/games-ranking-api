@@ -49,6 +49,14 @@ public class RankingControler {
         return this.rankingService.createRankingEntry(ranking, player);
     }
 
+    @PutMapping(value = "/{rankingId}/deleteRankingEntry/{playerId}")
+    public Ranking deleteRankingEntry(@PathVariable("rankingId") Long rankingId, @PathVariable("playerId") Long playerId) {
+        Ranking ranking = this.rankingService.findById(rankingId);
+        Player player = this.playerService.findById(playerId);
+
+        return this.rankingService.deleteRankingEntry(ranking, player);
+    }
+
     @PutMapping(value = "/{rankingId}/incrementVictories/{playerId}")
     public Ranking incrementVictories(@PathVariable("rankingId") Long rankingId, @PathVariable("playerId") Long playerId) {
         Ranking ranking = this.rankingService.findById(rankingId);

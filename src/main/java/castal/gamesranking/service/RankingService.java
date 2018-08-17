@@ -48,6 +48,19 @@ public class RankingService {
 
     }
 
+    public Ranking deleteRankingEntry(Ranking ranking, Player player) {
+
+        RankingEntry rankingEntry = this.repository.findRankingEntry(player, ranking);
+
+        if (rankingEntry != null) {
+            ranking.getRankingEntries().remove(rankingEntry);
+            repository.save(ranking);
+        }
+
+        return ranking;
+
+    }
+
     public Ranking incrementVictories(Ranking ranking, Player player) {
 
         RankingEntry rankingEntry = this.repository.findRankingEntry(player, ranking);
