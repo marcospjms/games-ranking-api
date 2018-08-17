@@ -33,4 +33,11 @@ public class PlayerControler {
     public Player update(@RequestBody Player player) {
         return this.playerService.saveOrUpdate(player);
     }
+
+    @DeleteMapping("/{id}")
+    public boolean delete(@PathVariable("id") Long id) {
+        Player player = this.playerService.findById(id);
+        this.playerService.delete(player);
+        return true;
+    }
 }

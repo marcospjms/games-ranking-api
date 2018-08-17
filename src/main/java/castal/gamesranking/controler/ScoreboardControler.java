@@ -98,4 +98,11 @@ public class ScoreboardControler {
         return this.scoreboardService.decreaseMatches(scoreboard, player);
     }
 
+    @DeleteMapping("/{id}")
+    public boolean delete(@PathVariable("id") Long id) {
+        Scoreboard scoreboard = this.scoreboardService.findById(id);
+        this.scoreboardService.delete(scoreboard);
+        return true;
+    }
+
 }
