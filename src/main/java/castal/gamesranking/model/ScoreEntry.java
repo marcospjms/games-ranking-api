@@ -27,7 +27,7 @@ public class ScoreEntry {
         this.player = player;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -39,11 +39,11 @@ public class ScoreEntry {
         this.player = player;
     }
 
-    public Long getVictories() {
+    public long getVictories() {
         return victories;
     }
 
-    public void setVictories(Long victories) {
+    public void setVictories(long victories) {
         this.victories = victories;
     }
 
@@ -52,19 +52,19 @@ public class ScoreEntry {
         this.incrementMatches();
     }
 
-    public void decrementVictories() {
+    public void decreaseVictories() {
         if (this.victories == 0) {
             throw new RuntimeException("Não é possível ter vitórias negativas");
         }
         this.victories--;
-        this.decrementMatches();
+        this.decreaseMatches();
     }
 
-    public Long getMatches() {
+    public long getMatches() {
         return matches;
     }
 
-    public void setMatches(Long matches) {
+    public void setMatches(long matches) {
         this.matches = matches;
     }
 
@@ -72,7 +72,7 @@ public class ScoreEntry {
         this.matches++;
     }
 
-    public void decrementMatches() {
+    public void decreaseMatches() {
         if (this.matches == 0) {
             throw new RuntimeException("Não é possível ter quantidade de partidas negativas");
         }

@@ -39,7 +39,7 @@ public class MainRunner implements CommandLineRunner {
 
         this.playerService.saveOrUpdate(player);
         this.scoreboardService.saveOrUpdate(scoreboard);
-        scoreboard = this.scoreboardService.incrementVictory(scoreboard, player);
+        scoreboard = this.scoreboardService.incrementVictories(scoreboard, player);
         LOGGER.info("Número de jogadores = {}", this.playerService.findAll().size());
         LOGGER.info("Número de scoreboards = {}", this.playerService.findAll().size());
 

@@ -35,7 +35,7 @@ public class ScoreboardService {
         return this.repository.count();
     }
 
-    public Scoreboard incrementVictory(Scoreboard scoreboard, Player player) {
+    public Scoreboard incrementVictories(Scoreboard scoreboard, Player player) {
 
         ScoreEntry scoreEntry = this.repository.findScoreEntry(player, scoreboard);
 
@@ -50,7 +50,7 @@ public class ScoreboardService {
 
     }
 
-    public Scoreboard decrementVictory(Scoreboard scoreboard, Player player) {
+    public Scoreboard decreaseVictories(Scoreboard scoreboard, Player player) {
 
         ScoreEntry scoreEntry = this.repository.findScoreEntry(player, scoreboard);
 
@@ -59,7 +59,7 @@ public class ScoreboardService {
             scoreboard.addScoreEntry(scoreEntry);
         }
 
-        scoreEntry.decrementVictories();
+        scoreEntry.decreaseVictories();
 
         return this.repository.save(scoreboard);
 
@@ -80,7 +80,7 @@ public class ScoreboardService {
 
     }
 
-    public Scoreboard decrementMatches(Scoreboard scoreboard, Player player) {
+    public Scoreboard decreaseMatches(Scoreboard scoreboard, Player player) {
 
         ScoreEntry scoreEntry = this.repository.findScoreEntry(player, scoreboard);
 
@@ -89,7 +89,7 @@ public class ScoreboardService {
             scoreboard.addScoreEntry(scoreEntry);
         }
 
-        scoreEntry.decrementMatches();
+        scoreEntry.decreaseMatches();
 
         return this.repository.save(scoreboard);
 
