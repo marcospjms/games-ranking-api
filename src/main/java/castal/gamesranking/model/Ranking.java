@@ -14,13 +14,13 @@ public class Ranking {
     private String name;
 
     @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE }, orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<RankingEntry> scoreEntries;
+    private Set<RankingEntry> rankingEntries;
 
     public Ranking() {
     }
 
-    public Ranking(Set<RankingEntry> scoreEntries) {
-        this.scoreEntries = scoreEntries;
+    public Ranking(Set<RankingEntry> rankingEntries) {
+        this.rankingEntries = rankingEntries;
     }
 
     public Long getId() {
@@ -35,19 +35,19 @@ public class Ranking {
         this.name = name;
     }
 
-    public Set<RankingEntry> getScoreEntries() {
-        return scoreEntries;
+    public Set<RankingEntry> getRankingEntries() {
+        return rankingEntries;
     }
 
-    public void setScoreEntries(Set<RankingEntry> scoreEntries) {
-        this.scoreEntries = scoreEntries;
+    public void setRankingEntries(Set<RankingEntry> rankingEntries) {
+        this.rankingEntries = rankingEntries;
     }
 
-    public void addScoreEntry(RankingEntry rankingEntry) {
-        if (this.scoreEntries == null) {
-            this.scoreEntries = new HashSet<>();
+    public void addRankingEntry(RankingEntry rankingEntry) {
+        if (this.rankingEntries == null) {
+            this.rankingEntries = new HashSet<>();
         }
-        this.scoreEntries.add(rankingEntry);
+        this.rankingEntries.add(rankingEntry);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class Ranking {
         return "Ranking{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", scoreEntries=" + scoreEntries +
+                ", rankingEntries=" + rankingEntries +
                 '}';
     }
 }

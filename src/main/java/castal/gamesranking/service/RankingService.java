@@ -14,8 +14,8 @@ public class RankingService {
     @Autowired
     private RankingRepository repository;
 
-    public Ranking saveOrUpdate(Ranking score) {
-        return this.repository.save(score);
+    public Ranking saveOrUpdate(Ranking ranking) {
+        return this.repository.save(ranking);
     }
 
     public void delete(Ranking ranking) {
@@ -35,13 +35,13 @@ public class RankingService {
         return this.repository.count();
     }
 
-    public Ranking createScoreEntry(Ranking ranking, Player player) {
+    public Ranking createRankingEntry(Ranking ranking, Player player) {
 
-        RankingEntry rankingEntry = this.repository.findScoreEntry(player, ranking);
+        RankingEntry rankingEntry = this.repository.findRankingEntry(player, ranking);
 
         if (rankingEntry == null) {
             rankingEntry = new RankingEntry(player);
-            ranking.addScoreEntry(rankingEntry);
+            ranking.addRankingEntry(rankingEntry);
         }
 
         return this.repository.save(ranking);
@@ -50,11 +50,11 @@ public class RankingService {
 
     public Ranking incrementVictories(Ranking ranking, Player player) {
 
-        RankingEntry rankingEntry = this.repository.findScoreEntry(player, ranking);
+        RankingEntry rankingEntry = this.repository.findRankingEntry(player, ranking);
 
         if (rankingEntry == null) {
             rankingEntry = new RankingEntry(player);
-            ranking.addScoreEntry(rankingEntry);
+            ranking.addRankingEntry(rankingEntry);
         }
 
         rankingEntry.incrementVictories();
@@ -65,11 +65,11 @@ public class RankingService {
 
     public Ranking decreaseVictories(Ranking ranking, Player player) {
 
-        RankingEntry rankingEntry = this.repository.findScoreEntry(player, ranking);
+        RankingEntry rankingEntry = this.repository.findRankingEntry(player, ranking);
 
         if (rankingEntry == null) {
             rankingEntry = new RankingEntry(player);
-            ranking.addScoreEntry(rankingEntry);
+            ranking.addRankingEntry(rankingEntry);
         }
 
         rankingEntry.decreaseVictories();
@@ -80,11 +80,11 @@ public class RankingService {
 
     public Ranking incrementMatches(Ranking ranking, Player player) {
 
-        RankingEntry rankingEntry = this.repository.findScoreEntry(player, ranking);
+        RankingEntry rankingEntry = this.repository.findRankingEntry(player, ranking);
 
         if (rankingEntry == null) {
             rankingEntry = new RankingEntry(player);
-            ranking.addScoreEntry(rankingEntry);
+            ranking.addRankingEntry(rankingEntry);
         }
 
         rankingEntry.incrementMatches();
@@ -95,11 +95,11 @@ public class RankingService {
 
     public Ranking decreaseMatches(Ranking ranking, Player player) {
 
-        RankingEntry rankingEntry = this.repository.findScoreEntry(player, ranking);
+        RankingEntry rankingEntry = this.repository.findRankingEntry(player, ranking);
 
         if (rankingEntry == null) {
             rankingEntry = new RankingEntry(player);
-            ranking.addScoreEntry(rankingEntry);
+            ranking.addRankingEntry(rankingEntry);
         }
 
         rankingEntry.decreaseMatches();

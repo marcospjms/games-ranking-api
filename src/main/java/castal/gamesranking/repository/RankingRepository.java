@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RankingRepository extends CrudRepository<Ranking, Long> {
 
-    @Query("SELECT scoreEntry FROM Ranking ranking JOIN ranking.scoreEntries scoreEntry " +
-            "WHERE scoreEntry.player = :player AND ranking = :selectedRanking")
-    RankingEntry findScoreEntry(@Param("player") Player player, @Param("selectedRanking") Ranking selectedRanking);
+    @Query("SELECT rankingEntry FROM Ranking ranking JOIN ranking.rankingEntries rankingEntry " +
+            "WHERE rankingEntry.player = :player AND ranking = :selectedRanking")
+    RankingEntry findRankingEntry(@Param("player") Player player, @Param("selectedRanking") Ranking selectedRanking);
 }

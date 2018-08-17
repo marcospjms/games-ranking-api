@@ -30,23 +30,23 @@ public class RankingControler {
 
     @PostMapping()
     public Ranking save(@RequestBody Ranking ranking) {
-        ranking.setScoreEntries(null);
+        ranking.setRankingEntries(null);
         return this.rankingService.saveOrUpdate(ranking);
     }
 
     @PutMapping()
     public Ranking update(@RequestBody Ranking ranking) {
         Ranking stored = rankingService.findById(ranking.getId());
-        ranking.setScoreEntries(stored.getScoreEntries()); // Não permitir mudar as entries pelo update
+        ranking.setRankingEntries(stored.getRankingEntries()); // Não permitir mudar as entries pelo update
         return this.rankingService.saveOrUpdate(ranking);
     }
 
-    @PutMapping(value = "/{rankingId}/createScoreEntry/{playerId}")
-    public Ranking createScoreEntry(@PathVariable("rankingId") Long rankingId, @PathVariable("playerId") Long playerId) {
+    @PutMapping(value = "/{rankingId}/createRankingEntry/{playerId}")
+    public Ranking createRankingEntry(@PathVariable("rankingId") Long rankingId, @PathVariable("playerId") Long playerId) {
         Ranking ranking = this.rankingService.findById(rankingId);
         Player player = this.playerService.findById(playerId);
 
-        return this.rankingService.createScoreEntry(ranking, player);
+        return this.rankingService.createRankingEntry(ranking, player);
     }
 
     @PutMapping(value = "/{rankingId}/incrementVictories/{playerId}")
