@@ -41,7 +41,15 @@ public class ScoreboardControler {
         return this.scoreboardService.saveOrUpdate(scoreboard);
     }
 
-    @PostMapping(value = "/{scoreboardId}/incrementVictories/{playerId}")
+    @PutMapping(value = "/{scoreboardId}/createScoreEntry/{playerId}")
+    public Scoreboard createScoreEntry(@PathVariable("scoreboardId") Long scoreboardId, @PathVariable("playerId") Long playerId) {
+        Scoreboard scoreboard = this.scoreboardService.findById(scoreboardId);
+        Player player = this.playerService.findById(playerId);
+
+        return this.scoreboardService.createScoreEntry(scoreboard, player);
+    }
+
+    @PutMapping(value = "/{scoreboardId}/incrementVictories/{playerId}")
     public Scoreboard incrementVictories(@PathVariable("scoreboardId") Long scoreboardId, @PathVariable("playerId") Long playerId) {
         Scoreboard scoreboard = this.scoreboardService.findById(scoreboardId);
         Player player = this.playerService.findById(playerId);
@@ -57,7 +65,7 @@ public class ScoreboardControler {
         return this.scoreboardService.incrementVictories(scoreboard, player);
     }
 
-    @PostMapping(value = "/{scoreboardId}/decreaseVictories/{playerId}")
+    @PutMapping(value = "/{scoreboardId}/decreaseVictories/{playerId}")
     public Scoreboard decreaseVictories(@PathVariable("scoreboardId") Long scoreboardId, @PathVariable("playerId") Long playerId) {
         Scoreboard scoreboard = this.scoreboardService.findById(scoreboardId);
         Player player = this.playerService.findById(playerId);
@@ -73,7 +81,7 @@ public class ScoreboardControler {
         return this.scoreboardService.decreaseVictories(scoreboard, player);
     }
 
-    @PostMapping(value = "/{scoreboardId}/incrementMatches/{playerId}")
+    @PutMapping(value = "/{scoreboardId}/incrementMatches/{playerId}")
     public Scoreboard incrementMatches(@PathVariable("scoreboardId") Long scoreboardId, @PathVariable("playerId") Long playerId) {
         Scoreboard scoreboard = this.scoreboardService.findById(scoreboardId);
         Player player = this.playerService.findById(playerId);
@@ -89,7 +97,7 @@ public class ScoreboardControler {
         return this.scoreboardService.incrementMatches(scoreboard, player);
     }
 
-    @PostMapping(value = "/{scoreboardId}/decreaseMatches/{playerId}")
+    @PutMapping(value = "/{scoreboardId}/decreaseMatches/{playerId}")
     public Scoreboard decreaseMatches(@PathVariable("scoreboardId") Long scoreboardId, @PathVariable("playerId") Long playerId) {
         Scoreboard scoreboard = this.scoreboardService.findById(scoreboardId);
         Player player = this.playerService.findById(playerId);

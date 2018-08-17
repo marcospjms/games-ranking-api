@@ -35,6 +35,19 @@ public class ScoreboardService {
         return this.repository.count();
     }
 
+    public Scoreboard createScoreEntry(Scoreboard scoreboard, Player player) {
+
+        ScoreEntry scoreEntry = this.repository.findScoreEntry(player, scoreboard);
+
+        if (scoreEntry == null) {
+            scoreEntry = new ScoreEntry(player);
+            scoreboard.addScoreEntry(scoreEntry);
+        }
+
+        return this.repository.save(scoreboard);
+
+    }
+
     public Scoreboard incrementVictories(Scoreboard scoreboard, Player player) {
 
         ScoreEntry scoreEntry = this.repository.findScoreEntry(player, scoreboard);
