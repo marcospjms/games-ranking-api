@@ -1,12 +1,12 @@
 package castal.gamesranking.service;
 
 import castal.gamesranking.model.Player;
-import castal.gamesranking.model.ScoreEntry;
-import castal.gamesranking.model.Scoreboard;
+import castal.gamesranking.model.Ranking;
+import castal.gamesranking.model.RankingEntry;
 import castal.gamesranking.repository.PlayerRepository;
 import static org.junit.Assert.*;
 
-import castal.gamesranking.repository.ScoreboardRepository;
+import castal.gamesranking.repository.RankingRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -20,74 +20,74 @@ public class PlayerServiceTest {
     @Mock
     private PlayerRepository playerRepository;
     @Mock
-    private ScoreboardRepository scoreboardRepository;
+    private RankingRepository rankingRepository;
 
     @InjectMocks
     private PlayerService playerService;
 
     @InjectMocks
-    private ScoreboardService scoreboarService;
+    private RankingService scoreboarService;
 
     @Test
     public void testIncrementVictories() {
-        Scoreboard scoreboard = new Scoreboard();
+        Ranking ranking = new Ranking();
         Player player = new Player("Marcos Paulo");
-        ScoreEntry scoreEntry = new ScoreEntry(player);
-        when(this.scoreboardRepository.findScoreEntry(player, scoreboard)).thenReturn(scoreEntry);
-        when(this.scoreboardRepository.save(scoreboard)).thenReturn(scoreboard);
+        RankingEntry rankingEntry = new RankingEntry(player);
+        when(this.rankingRepository.findScoreEntry(player, ranking)).thenReturn(rankingEntry);
+        when(this.rankingRepository.save(ranking)).thenReturn(ranking);
 
-        assertEquals(scoreboard, scoreboarService.incrementVictories(scoreboard, player));
+        assertEquals(ranking, scoreboarService.incrementVictories(ranking, player));
 
-        assertEquals(1L, scoreEntry.getVictories());
-        assertEquals(1L, scoreEntry.getMatches());
+        assertEquals(1L, rankingEntry.getVictories());
+        assertEquals(1L, rankingEntry.getMatches());
     }
 
     @Test
     public void testDecreaseVictories() {
-        Scoreboard scoreboard = new Scoreboard();
+        Ranking ranking = new Ranking();
         Player player = new Player("Marcos Paulo");
-        ScoreEntry scoreEntry = new ScoreEntry(player);
-        scoreEntry.incrementVictories();
-        scoreEntry.incrementVictories();
-        scoreEntry.incrementVictories();
-        when(this.scoreboardRepository.findScoreEntry(player, scoreboard)).thenReturn(scoreEntry);
-        when(this.scoreboardRepository.save(scoreboard)).thenReturn(scoreboard);
+        RankingEntry rankingEntry = new RankingEntry(player);
+        rankingEntry.incrementVictories();
+        rankingEntry.incrementVictories();
+        rankingEntry.incrementVictories();
+        when(this.rankingRepository.findScoreEntry(player, ranking)).thenReturn(rankingEntry);
+        when(this.rankingRepository.save(ranking)).thenReturn(ranking);
 
-        assertEquals(scoreboard, scoreboarService.decreaseVictories(scoreboard, player));
+        assertEquals(ranking, scoreboarService.decreaseVictories(ranking, player));
 
-        assertEquals(2L, scoreEntry.getVictories());
-        assertEquals(2L, scoreEntry.getVictories());
+        assertEquals(2L, rankingEntry.getVictories());
+        assertEquals(2L, rankingEntry.getVictories());
     }
 
     @Test
     public void testIncrementMatchs() {
-        Scoreboard scoreboard = new Scoreboard();
+        Ranking ranking = new Ranking();
         Player player = new Player("Marcos Paulo");
-        ScoreEntry scoreEntry = new ScoreEntry(player);
+        RankingEntry rankingEntry = new RankingEntry(player);
 
-        when(this.scoreboardRepository.findScoreEntry(player, scoreboard)).thenReturn(scoreEntry);
-        when(this.scoreboardRepository.save(scoreboard)).thenReturn(scoreboard);
+        when(this.rankingRepository.findScoreEntry(player, ranking)).thenReturn(rankingEntry);
+        when(this.rankingRepository.save(ranking)).thenReturn(ranking);
 
-        assertEquals(scoreboard, scoreboarService.incrementMatches(scoreboard, player));
+        assertEquals(ranking, scoreboarService.incrementMatches(ranking, player));
 
-        assertEquals(1L, scoreEntry.getMatches());
-        assertEquals(0L, scoreEntry.getVictories());
+        assertEquals(1L, rankingEntry.getMatches());
+        assertEquals(0L, rankingEntry.getVictories());
     }
 
     @Test
     public void testDecreaseMatchs() {
-        Scoreboard scoreboard = new Scoreboard();
+        Ranking ranking = new Ranking();
         Player player = new Player("Marcos Paulo");
-        ScoreEntry scoreEntry = new ScoreEntry(player);
-        scoreEntry.incrementMatches();
-        scoreEntry.incrementMatches();
-        scoreEntry.incrementMatches();
-        when(this.scoreboardRepository.findScoreEntry(player, scoreboard)).thenReturn(scoreEntry);
-        when(this.scoreboardRepository.save(scoreboard)).thenReturn(scoreboard);
+        RankingEntry rankingEntry = new RankingEntry(player);
+        rankingEntry.incrementMatches();
+        rankingEntry.incrementMatches();
+        rankingEntry.incrementMatches();
+        when(this.rankingRepository.findScoreEntry(player, ranking)).thenReturn(rankingEntry);
+        when(this.rankingRepository.save(ranking)).thenReturn(ranking);
 
-        assertEquals(scoreboard, scoreboarService.decreaseMatches(scoreboard, player));
+        assertEquals(ranking, scoreboarService.decreaseMatches(ranking, player));
 
-        assertEquals(2L, scoreEntry.getMatches());
-        assertEquals(0L, scoreEntry.getVictories());
+        assertEquals(2L, rankingEntry.getMatches());
+        assertEquals(0L, rankingEntry.getVictories());
     }
 }

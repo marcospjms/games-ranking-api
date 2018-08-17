@@ -1,13 +1,7 @@
 package castal.gamesranking.main;
 
-import castal.gamesranking.model.Player;
-import castal.gamesranking.model.Scoreboard;
-import castal.gamesranking.service.PlayerService;
-import castal.gamesranking.service.ScoreboardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

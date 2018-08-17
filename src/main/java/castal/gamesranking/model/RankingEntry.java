@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "score_entries")
-public class ScoreEntry {
+public class RankingEntry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -20,10 +20,10 @@ public class ScoreEntry {
     @Column(columnDefinition = "long default 0")
     private long matches = 0;
 
-    public ScoreEntry() {
+    public RankingEntry() {
     }
 
-    public ScoreEntry(Player player) {
+    public RankingEntry(Player player) {
         this.player = player;
     }
 
@@ -83,7 +83,7 @@ public class ScoreEntry {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ScoreEntry that = (ScoreEntry) o;
+        RankingEntry that = (RankingEntry) o;
         return Objects.equals(id, that.id);
     }
 
@@ -95,7 +95,7 @@ public class ScoreEntry {
 
     @Override
     public String toString() {
-        return "ScoreEntry{" +
+        return "RankingEntry{" +
                 "id=" + id +
                 ", player=" + player +
                 ", victories=" + victories +

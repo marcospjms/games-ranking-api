@@ -1,15 +1,14 @@
 package castal.gamesranking.main;
 
 import castal.gamesranking.model.Player;
-import castal.gamesranking.model.Scoreboard;
+import castal.gamesranking.model.Ranking;
 import castal.gamesranking.service.PlayerService;
-import castal.gamesranking.service.ScoreboardService;
+import castal.gamesranking.service.RankingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -25,7 +24,7 @@ public class MainRunner implements CommandLineRunner {
     @Autowired
     private PlayerService playerService;
     @Autowired
-    private ScoreboardService scoreboardService;
+    private RankingService rankingService;
 
     public static void main(String[] args) {
         SpringApplication.run(MainRunner.class, args);
@@ -35,15 +34,15 @@ public class MainRunner implements CommandLineRunner {
     public void run(String... args) {
         LOGGER.info("Número de jogadores = {}", this.playerService.findAll().size());
         Player player = new Player("Marcos Paulo");
-        Scoreboard scoreboard = new Scoreboard();
+        Ranking ranking = new Ranking();
 
         this.playerService.saveOrUpdate(player);
-        this.scoreboardService.saveOrUpdate(scoreboard);
-        scoreboard = this.scoreboardService.incrementVictories(scoreboard, player);
+        this.rankingService.saveOrUpdate(ranking);
+        ranking = this.rankingService.incrementVictories(ranking, player);
         LOGGER.info("Número de jogadores = {}", this.playerService.findAll().size());
-        LOGGER.info("Número de scoreboards = {}", this.playerService.findAll().size());
+        LOGGER.info("Número de rankings = {}", this.playerService.findAll().size());
 
-        LOGGER.info("Scoreboard final = {}", scoreboard);
+        LOGGER.info("Ranking final = {}", ranking);
 
     }
 }

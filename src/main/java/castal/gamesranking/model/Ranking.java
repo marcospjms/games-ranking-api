@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Table(name = "scoreboards")
-public class Scoreboard {
+@Table(name = "ranking")
+public class Ranking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -14,12 +14,12 @@ public class Scoreboard {
     private String name;
 
     @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE }, orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<ScoreEntry> scoreEntries;
+    private Set<RankingEntry> scoreEntries;
 
-    public Scoreboard() {
+    public Ranking() {
     }
 
-    public Scoreboard(Set<ScoreEntry> scoreEntries) {
+    public Ranking(Set<RankingEntry> scoreEntries) {
         this.scoreEntries = scoreEntries;
     }
 
@@ -35,26 +35,26 @@ public class Scoreboard {
         this.name = name;
     }
 
-    public Set<ScoreEntry> getScoreEntries() {
+    public Set<RankingEntry> getScoreEntries() {
         return scoreEntries;
     }
 
-    public void setScoreEntries(Set<ScoreEntry> scoreEntries) {
+    public void setScoreEntries(Set<RankingEntry> scoreEntries) {
         this.scoreEntries = scoreEntries;
     }
 
-    public void addScoreEntry(ScoreEntry scoreEntry) {
+    public void addScoreEntry(RankingEntry rankingEntry) {
         if (this.scoreEntries == null) {
             this.scoreEntries = new HashSet<>();
         }
-        this.scoreEntries.add(scoreEntry);
+        this.scoreEntries.add(rankingEntry);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Scoreboard that = (Scoreboard) o;
+        Ranking that = (Ranking) o;
         return Objects.equals(id, that.id);
     }
 
@@ -66,7 +66,7 @@ public class Scoreboard {
 
     @Override
     public String toString() {
-        return "Scoreboard{" +
+        return "Ranking{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", scoreEntries=" + scoreEntries +
