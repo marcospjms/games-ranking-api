@@ -11,6 +11,8 @@ public class Scoreboard {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    private String name;
+
     @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE }, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<ScoreEntry> scoreEntries;
 
@@ -23,6 +25,14 @@ public class Scoreboard {
 
     public Long getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<ScoreEntry> getScoreEntries() {
@@ -58,6 +68,7 @@ public class Scoreboard {
     public String toString() {
         return "Scoreboard{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
                 ", scoreEntries=" + scoreEntries +
                 '}';
     }

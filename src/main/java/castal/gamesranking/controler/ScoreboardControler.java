@@ -34,6 +34,13 @@ public class ScoreboardControler {
         return this.scoreboardService.saveOrUpdate(scoreboard);
     }
 
+    @PutMapping()
+    public Scoreboard update(@RequestBody Scoreboard scoreboard) {
+        Scoreboard stored = scoreboardService.findById(scoreboard.getId());
+        scoreboard.setScoreEntries(stored.getScoreEntries()); // Não permitir mudar as entries pelo update
+        return this.scoreboardService.saveOrUpdate(scoreboard);
+    }
+
     @PostMapping(value = "/{scoreboardId}/incrementVictories/{playerId}")
     public Scoreboard incrementVictories(@PathVariable("scoreboardId") Long scoreboardId, @PathVariable("playerId") Long playerId) {
         Scoreboard scoreboard = this.scoreboardService.findById(scoreboardId);
