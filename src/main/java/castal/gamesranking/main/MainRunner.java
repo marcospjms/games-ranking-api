@@ -1,7 +1,9 @@
 package castal.gamesranking.main;
 
 import castal.gamesranking.model.Player;
+import castal.gamesranking.model.Scoreboard;
 import castal.gamesranking.service.PlayerService;
+import castal.gamesranking.service.ScoreboardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class MainRunner implements CommandLineRunner {
 
     @Autowired
     private PlayerService playerService;
+    @Autowired
+    private ScoreboardService scoreboardService;
 
     public static void main(String[] args) {
         SpringApplication.run(MainRunner.class, args);
@@ -30,7 +34,16 @@ public class MainRunner implements CommandLineRunner {
     @Override
     public void run(String... args) {
         LOGGER.info("Número de jogadores = {}", this.playerService.findAll().size());
-        this.playerService.saveOrUpdate(new Player("Marcos Paulo"));
+        Player player = new Player("Marcos Paulo");
+        Scoreboard scoreboard = new Scoreboard();
+
+        this.playerService.saveOrUpdate(player);
+        this.scoreboardService.saveOrUpdate(scoreboard);
+        scoreboard = this.scoreboardService.incrementVictory(scoreboard, player);
         LOGGER.info("Número de jogadores = {}", this.playerService.findAll().size());
+        LOGGER.info("Número de scoreboards = {}", this.playerService.findAll().size());
+
+        LOGGER.info("Scoreboard final = {}", scoreboard);
+
     }
 }

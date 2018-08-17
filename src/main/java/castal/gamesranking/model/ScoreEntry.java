@@ -14,9 +14,11 @@ public class ScoreEntry {
     @OneToOne
     private Player player;
 
-    private Long victories;
+    @Column(columnDefinition = "long default 0")
+    private long victories = 0;
 
-    private Long loss;
+    @Column(columnDefinition = "long default 0")
+    private long matches = 0;
 
     public ScoreEntry() {
     }
@@ -45,12 +47,36 @@ public class ScoreEntry {
         this.victories = victories;
     }
 
-    public Long getLoss() {
-        return loss;
+    public void incrementVictories() {
+        this.victories++;
+        this.incrementMatches();
     }
 
-    public void setLoss(Long loss) {
-        this.loss = loss;
+    public void decrementVictories() {
+        if (this.victories == 0) {
+            throw new RuntimeException("Não é possível ter vitórias negativas");
+        }
+        this.victories--;
+        this.decrementMatches();
+    }
+
+    public Long getMatches() {
+        return matches;
+    }
+
+    public void setMatches(Long matches) {
+        this.matches = matches;
+    }
+
+    public void incrementMatches() {
+        this.matches++;
+    }
+
+    public void decrementMatches() {
+        if (this.matches == 0) {
+            throw new RuntimeException("Não é possível ter quantidade de partidas negativas");
+        }
+        this.matches--;
     }
 
     @Override
@@ -65,5 +91,15 @@ public class ScoreEntry {
     public int hashCode() {
 
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "ScoreEntry{" +
+                "id=" + id +
+                ", player=" + player +
+                ", victories=" + victories +
+                ", matches=" + matches +
+                '}';
     }
 }

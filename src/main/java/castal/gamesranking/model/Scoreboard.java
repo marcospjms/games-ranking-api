@@ -1,8 +1,7 @@
 package castal.gamesranking.model;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "scoreboards")
@@ -12,13 +11,13 @@ public class Scoreboard {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
-    private List<ScoreEntry> scoreEntries;
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE }, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<ScoreEntry> scoreEntries;
 
     public Scoreboard() {
     }
 
-    public Scoreboard(List<ScoreEntry> scoreEntries) {
+    public Scoreboard(Set<ScoreEntry> scoreEntries) {
         this.scoreEntries = scoreEntries;
     }
 
@@ -26,12 +25,15 @@ public class Scoreboard {
         return id;
     }
 
-    public List<ScoreEntry> getScoreEntries() {
+    public Set<ScoreEntry> getScoreEntries() {
         return scoreEntries;
     }
 
-    public void setScoreEntries(List<ScoreEntry> scoreEntries) {
-        this.scoreEntries = scoreEntries;
+    public void addScoreEntry(ScoreEntry scoreEntry) {
+        if (this.scoreEntries == null) {
+            this.scoreEntries = new HashSet<>();
+        }
+        this.scoreEntries.add(scoreEntry);
     }
 
     @Override
@@ -46,5 +48,13 @@ public class Scoreboard {
     public int hashCode() {
 
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Scoreboard{" +
+                "id=" + id +
+                ", scoreEntries=" + scoreEntries +
+                '}';
     }
 }
