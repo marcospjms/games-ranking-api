@@ -23,4 +23,8 @@ public class PlayerService {
     public List<Player> findAll() {
         return (List<Player>) this.repository.findAll();
     }
+
+    public long count() {
+        return this.repository.count();
+    }
 }
